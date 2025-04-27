@@ -134,10 +134,10 @@ String fontType = ".ttf";
 
 
 // Define the font size in points for the TFT_eSPI font file
-int  fontSize = 20;
+int  fontSize = 18;
 
 // Font size to use in the Processing sketch display window that pops up (can be different to above)
-int displayFontSize = 20;
+int displayFontSize = 18;
 
 // Create a C header (.h file) ready to be used or copied in your sketch folder
 boolean createHeaderFile = true;

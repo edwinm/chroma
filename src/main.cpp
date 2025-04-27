@@ -4,6 +4,8 @@
 #include <SPIFFS.h>
 #include <User_Setups/Setup47_ST7735.h>
 
+#define GOLD 0xfd00
+
 TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite paletSprite = TFT_eSprite(&tft);
 TFT_eSprite hexSprite = TFT_eSprite(&tft);
@@ -28,14 +30,15 @@ void setup() {
     while (1) yield();
   }
 
-  if (!SPIFFS.exists("/Audiowide20.vlw")) {
+  if (!SPIFFS.exists("/Audiowide18.vlw")) {
     Serial.println("Font missing in flash memory");
     while (1) yield();
   }
 
-  hexSprite.loadFont("Audiowide20");
+  hexSprite.loadFont("Audiowide18");
 
-  hexSprite.drawString("#CD08C0", 5, 0, 0);
+  hexSprite.setTextColor(GOLD);
+  hexSprite.drawString("#CD08C0", 13, 0, 0);
   hexSprite.pushSprite(0, TFT_HEIGHT - 40);
 }
 
