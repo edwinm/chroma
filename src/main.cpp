@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <HardwareSerial.h>
 #include <TFT_eSPI.h>
+#include <SPIFFS.h>
 #include <User_Setups/Setup47_ST7735.h>
 
 TFT_eSPI tft = TFT_eSPI();
@@ -16,14 +17,26 @@ void setup() {
   tft.fillScreen(TFT_BLACK);
 
   paletSprite.createSprite(TFT_WIDTH, TFT_HEIGHT / 2);
-  hexSprite.createSprite(TFT_WIDTH, 40);
+  hexSprite.createSprite(TFT_WIDTH, 20);
 
   paletSprite.fillSprite(TFT_BLACK);
-  paletSprite.fillRoundRect(20, 20, TFT_WIDTH - 40, TFT_HEIGHT / 2 - 40, 10, TFT_CYAN);
-  paletSprite.pushSprite(0, 0);
+  paletSprite.fillRoundRect(10, 0, TFT_WIDTH - 20, TFT_HEIGHT / 2, 15, TFT_CYAN);
+  paletSprite.pushSprite(0, 10);
 
-  hexSprite.drawString("#CD08C0", 0, 0, 2);
-  hexSprite.pushSprite(0, TFT_HEIGHT / 2);
+  if (!SPIFFS.begin()) {
+    Serial.println("Flash memory initialisation failed");
+    while (1) yield();
+  }
+
+  if (!SPIFFS.exists("/Audiowide20.vlw")) {
+    Serial.println("Font missing in flash memory");
+    while (1) yield();
+  }
+
+  hexSprite.loadFont("Audiowide20");
+
+  hexSprite.drawString("#CD08C0", 5, 0, 0);
+  hexSprite.pushSprite(0, TFT_HEIGHT - 40);
 }
 
 void loop() {
