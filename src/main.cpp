@@ -4,8 +4,6 @@
 #include <SPIFFS.h>
 #include <User_Setups/Setup47_ST7735.h>
 
-#define GOLD 0xfd00
-
 TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite paletSprite = TFT_eSprite(&tft);
 TFT_eSprite hexSprite = TFT_eSprite(&tft);
@@ -22,7 +20,7 @@ void setup() {
   hexSprite.createSprite(TFT_WIDTH, 20);
 
   paletSprite.fillSprite(TFT_BLACK);
-  paletSprite.fillRoundRect(10, 0, TFT_WIDTH - 20, TFT_HEIGHT / 2, 15, TFT_CYAN);
+  paletSprite.fillRoundRect(10, 0, TFT_WIDTH - 20, TFT_HEIGHT / 2, 15, TFT_GOLD);
   paletSprite.pushSprite(0, 10);
 
   if (!SPIFFS.begin()) {
@@ -37,7 +35,7 @@ void setup() {
 
   hexSprite.loadFont("Audiowide18");
 
-  hexSprite.setTextColor(GOLD);
+  hexSprite.setTextColor(TFT_CYAN);
   hexSprite.drawString("#CD08C0", 13, 0, 0);
   hexSprite.pushSprite(0, TFT_HEIGHT - 40);
 }
