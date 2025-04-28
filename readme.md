@@ -1,0 +1,23 @@
+# ChromaLex
+
+## ST7735
+
+CS
+DC
+RST
+SDA
+SCK
+VCC
+GND
+
+## TCS34725
+
+NC
+INT
+SDA
+SCL
+
+GND
+DR
+CT
+VCC
